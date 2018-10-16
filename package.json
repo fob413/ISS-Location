@@ -4,7 +4,8 @@
   "description": "Shows the point of the International Space Station on Google Map",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:dev": "nodemon ./app.js --exec babel-node --presets babel-preset-env"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,18 @@
   "bugs": {
     "url": "https://github.com/fob413/ISS-Location/issues"
   },
-  "homepage": "https://github.com/fob413/ISS-Location#readme"
+  "homepage": "https://github.com/fob413/ISS-Location#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "mongoose": "^5.3.4",
+    "morgan": "^1.9.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "jscs": "^3.0.7",
+    "jshint": "^2.9.6",
+    "nodemon": "^1.18.4"
+  }
 }
