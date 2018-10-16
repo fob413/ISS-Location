@@ -1,9 +1,23 @@
 import express from 'express';
-import bodyParser from 'body-parser';
+import { json as jsonParser } from 'body-parser';
 import logger from 'morgan';
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
 
-const jsonParser = bodyParser.json;
+dotenv.config();
+
 const app = express();
+
+mongoose.connect(process.env.DATABASE);
+const db = mongoose.connection;
+
+db.on("error", err => {
+  console.error("connection error:", err);
+});
+
+db.once("open", () => {
+  console.log("db connection successful");
+});
 
 app.use(logger("dev"));
 app.use(jsonParser());
@@ -37,7 +51,7 @@ app.use((err, req, res, next) => {
 });
 
 
-var port = process.env.PORT || 3000;
+const port = process.env.PORT || 3000;
 
 app.listen(port, () => {
   console.log('Express server is listening on port:', port);
