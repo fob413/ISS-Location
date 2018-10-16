@@ -1,0 +1,19 @@
+{
+  "name": "iss-location",
+  "version": "1.0.0",
+  "description": "Shows the point of the International Space Station on Google Map",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fob413/ISS-Location.git"
+  },
+  "author": "Oluwafunso Oluyole-Balogun",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fob413/ISS-Location/issues"
+  },
+  "homepage": "https://github.com/fob413/ISS-Location#readme"
+}
