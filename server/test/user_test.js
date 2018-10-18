@@ -79,3 +79,69 @@ describe('User Signup', () => {
       });
   });  
 });
+
+describe('User signin', () => {
+  before(done => {
+    User.remove({}, (err) => {
+      // clear user database
+    });
+
+    const user = {
+        username: 'funsho',
+        email: 'funsho@email.com',
+        password: 'asdf;lkj',
+        confirmPassword: 'asdf;lkj'
+      };
+
+      request(server)
+        .post('/api/v1/auth/signup')
+        .send(user)
+        .end((err, res) => {
+          done();
+        });
+  });
+
+  it('should sign in a valid user', (done) => {
+    const user = {
+      email: 'funsho@email.com',
+      password: 'asdf;lkj',
+    };
+
+    request(server)
+      .post('/api/v1/auth/signin')
+      .send(user)
+      .end((err, res) => {
+        expect(res.status).to.deep.equal(200);
+        done();
+      });
+  });
+
+  it('should not sign in an invalid email', (done) => {
+    const user = {
+      email: 'fun@email.com',
+      password: 'asdf;lkj',
+    };
+
+    request(server)
+      .post('/api/v1/auth/signin')
+      .send(user)
+      .end((err, res) => {
+        expect(res.status).to.deep.equal(401);
+        done();
+      });
+  });
+
+  it('should not sign in invalid data', (done) => {
+    const user = {
+      email: 'fun@email.com',
+    };
+
+    request(server)
+      .post('/api/v1/auth/signin')
+      .send(user)
+      .end((err, res) => {
+        expect(res.status).to.deep.equal(400);
+        done();
+      });
+  });
+});
