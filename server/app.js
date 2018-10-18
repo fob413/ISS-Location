@@ -3,6 +3,8 @@ import { json as jsonParser } from 'body-parser';
 import logger from 'morgan';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import routes from './routes';
+import { notFound, handler } from './middleware/error';
 
 dotenv.config();
 
@@ -32,27 +34,20 @@ app.use((req, res, next) => {
 	next();
 });
 
+// include routes
+app.use('/api/v1/', routes);
 
 // catch 404 and forward to error handler
-app.use((req, res, next) => {
-  let error = new Error("Not Found");
-  error.status = 404;
-  next(error);
-});
+app.use(notFound);
 
 // Error handler
-app.use((err, req, res, next) => {
-  res.status(err.status || 500);
-  res.json({
-    error: {
-      message: err.message
-    }
-  });
-});
+app.use(handler);
 
 
 const port = process.env.PORT || 3000;
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log('Express server is listening on port:', port);
 });
+
+export default server;
