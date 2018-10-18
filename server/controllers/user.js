@@ -31,6 +31,28 @@ class User {
       });
     });
   }
+
+  static signin (req, res, next) {
+    UserModel.authenticate(req.body.email, req.body.password, function (error, user) {
+      if (error || !user) {
+        let err = new Error("Wrong email or password");
+        err.status = 401;
+        return next(err);
+      } else {
+        const token = jwt.sign({
+          data: {
+            id: user._id,
+            username: user.username
+          }
+        }, process.env.SECRET, { expiresIn: '12h' });
+
+        return res.json({
+          success: true,
+          token
+        });
+      }
+    });
+  }
 }
 
 module.exports = User;

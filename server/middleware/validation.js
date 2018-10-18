@@ -12,7 +12,20 @@ class Validation {
       ) {
       next();
     } else {
-      let error = new Error('Valid json object is required');
+      let error = new Error('Username, email, password and confirmPasswrod are required');
+      error.status = 400;
+      next(error);
+    }
+  }
+
+  static validateSignin (req, res, next) {
+    if (
+      req.body.email.trim() &&
+      req.body.password
+    ) {
+      next();
+    } else {
+      let error = new Error("Username and password are required");
       error.status = 400;
       next(error);
     }
