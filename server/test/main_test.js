@@ -4,7 +4,8 @@ import { expect } from 'chai';
 // Test suite
 describe('ISSLocation',  () => {
 	// Test spec (unit test)
-	it('should run tests',  () => {
+	it('should run tests',  (done) => {
 		expect(true).to.be.ok;
+		done();
 	});
 });
