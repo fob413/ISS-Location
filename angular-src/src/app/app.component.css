@@ -1,0 +1,35 @@
+.side-bar {
+  background-color: #504E4E;
+  background-image: url('../assets/images/issl.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  height: 10vh;
+}
+
+.main-app {
+  height: 40vh;
+}
+
+.map {
+  height: 50vh;
+}
+
+@media screen and (min-width: 960px) {
+  .side-bar {
+    background-color: #504E4E;
+    height: 100vh;
+    background-image: url('../assets/images/issl2.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;  
+  }
+  
+  .main-app {
+    height: 100vh;
+  }
+  
+  .map {
+    height: 100vh;
+  }
+}
