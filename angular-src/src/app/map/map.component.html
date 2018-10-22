@@ -1,3 +1,7 @@
-<div class="col-sm-12 col-md-5">
-  google map
-</div>
+<agm-map [latitude]="lat" [longitude]="lng">
+  <agm-marker
+    [latitude]="lat"
+    [longitude]="lng"
+    [iconUrl]="'assets/images/issicon.png'"
+    ></agm-marker>
+</agm-map>
