@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { IssService } from '../iss.service';
 
 @Component({
   selector: 'app-map',
@@ -6,12 +7,35 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./map.component.css']
 })
 export class MapComponent implements OnInit {
-  lat: number = 6.5244;
-  lng: number = 3.3792;
+  latitude: number;
+  longitude: number;
+  zoom: number = 2.53;
 
-  constructor() { }
+  recenterMap(lat,lng){
+    this.latitude = lat;
+    this.longitude = lng;
+    }
+
+  getLocation(): void {
+    this.issService.getLocation().subscribe(
+      data => {
+        this.latitude = data['location']['latitude'];
+        this.longitude = data['location']['longitude'];
+      },
+      err => console.error(err)
+    );
+  }
+
+  constructor(private issService: IssService) { }
 
   ngOnInit() {
+    this.getLocation();
+  }
+
+  ngAfterContentInit() {
+    setInterval(() => {
+      this.getLocation();
+    }, 5000);
   }
 
 }
