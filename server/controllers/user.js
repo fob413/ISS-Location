@@ -14,7 +14,6 @@ class User {
 
     UserModel.create(userData, (err, user) => {
       if (err) {
-        console.dir(err);
         return next(err);
       }
       
