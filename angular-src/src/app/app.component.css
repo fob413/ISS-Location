@@ -3,16 +3,25 @@
   background-image: url('../assets/images/issl.png');
   background-repeat: no-repeat;
   background-position: center;
-  background-size: contain;
+  background-size: 130px;
   height: 10vh;
 }
 
 .main-app {
   height: 40vh;
+  background-color: #E9EAEB;
 }
 
 .map {
   height: 50vh;
+  padding: 0;
+}
+
+.error {
+  position: absolute;
+  z-index: 1;
+  width: 100vw;
+  text-align: center;
 }
 
 @media screen and (min-width: 960px) {
@@ -22,11 +31,12 @@
     background-image: url('../assets/images/issl2.png');
     background-repeat: no-repeat;
     background-position: center;
-    background-size: contain;  
+    background-size: 90px;  
   }
   
   .main-app {
     height: 100vh;
+    border: black solid 1px;
   }
   
   .map {

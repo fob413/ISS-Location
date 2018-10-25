@@ -1,0 +1,9 @@
+<div class="col-sm-12">
+  <div *ngIf="authenticated">
+    main app
+  </div>
+
+  <div *ngIf="authenticated != true" class="auth">
+    <app-authentication></app-authentication>
+  </div>
+</div>
