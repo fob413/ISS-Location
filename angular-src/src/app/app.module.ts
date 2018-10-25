@@ -2,20 +2,31 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AgmCoreModule } from '@agm/core';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SidebarComponent } from './sidebar/sidebar.component';
-import { MapComponent } from './map/map.component';
-import { AppPageComponent } from './app-page/app-page.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { MapComponent } from './components/map/map.component';
+import { AppPageComponent } from './components/app-page/app-page.component';
 import { environment } from '../environments/environment.dev';
+import { AuthenticationComponent } from './components/app-page/authentication/authentication.component';
+import { LoginComponent } from './components/app-page/authentication/login/login.component';
+
+import { AuthService } from './services/auth.service';
+
+import { FlashMessagesModule } from 'angular2-flash-messages';
+import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 
 @NgModule({
   declarations: [
     AppComponent,
     SidebarComponent,
     MapComponent,
-    AppPageComponent
+    AppPageComponent,
+    AuthenticationComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -23,9 +34,13 @@ import { environment } from '../environments/environment.dev';
     AgmCoreModule.forRoot({
       apiKey: environment.apiKey
     }),
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    FlashMessagesModule.forRoot(),
+    Ng4LoadingSpinnerModule.forRoot(),
+    HttpModule
   ],
-  providers: [],
+  providers: [ AuthService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

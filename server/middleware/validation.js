@@ -20,6 +20,7 @@ class Validation {
 
   static validateSignin (req, res, next) {
     if (
+      req.body.email &&
       req.body.email.trim() &&
       req.body.password
     ) {

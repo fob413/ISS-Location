@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IssService } from '../iss.service';
+import { IssService } from '../../services/iss.service';
 
 @Component({
   selector: 'app-map',
