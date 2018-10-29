@@ -5,13 +5,15 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  selector: 'app-signup',
+  templateUrl: './signup.component.html',
+  styleUrls: ['./signup.component.css']
 })
-export class LoginComponent implements OnInit {
-  email: String;
-  password: String;
+export class SignupComponent implements OnInit {
+  email: string;
+  username: string;
+  password: string;
+  confirmPassword: string;
   login:boolean = true;
 
   constructor(
@@ -19,7 +21,7 @@ export class LoginComponent implements OnInit {
     private flashMessage: FlashMessagesService,
     private authService: AuthService,
     private spinnerService: Ng4LoadingSpinnerService
-    ) { }
+  ) { }
 
   ngOnInit() {
     this.authService.login.subscribe(login => this.login = login);
@@ -29,14 +31,16 @@ export class LoginComponent implements OnInit {
     this.authService.updateLogin(!this.login);
   }
 
-  onLoginSubmit() {
+  onSignupSubmit() {
     const user = {
       email: this.email,
-      password: this.password
+      username: this.username,
+      password: this.password,
+      confirmPassword: this.confirmPassword
     }
 
-    // validate required fields
-    if (!this.validateService.validateLogin(user)) {
+    // validate all required fields
+    if (!this.validateService.validateSignup(user)){
       this.flashMessage.show('Please fill in all fields', {
         cssClass: 'alert-danger',
         timeout: 5000
@@ -53,21 +57,30 @@ export class LoginComponent implements OnInit {
       return false;
     }
 
-    // login user
+    // validate passwords
+    if (!this.validateService.validatePasswords(user)) {
+      this.flashMessage.show('Passwords do not match', {
+        cssClass: 'alert-danger',
+        timeout: 5000
+      });
+      return false;
+    }
+
+    // signup user
     this.spinnerService.show();
-    this.authService.loginUser(user).subscribe(data => {
+    this.authService.signupUser(user).subscribe(data => {
       if (data.success) {
-        this.flashMessage.show('Successfully logged in', {
+        this.flashMessage.show('Successfully signed up', {
           cssClass: 'alert-success',
           timeout: 5000
         });
         this.authService.updateAuthentication(true);
-        
+
         // store token
         this.authService.saveToken(data.token);
         this.spinnerService.hide();
       } else {
-        this.flashMessage.show('Invalid username or password', {
+        this.flashMessage.show('An error occured while signing up, please try again later', {
           cssClass: 'alert-danger',
           timeout: 5000
         });
@@ -75,11 +88,15 @@ export class LoginComponent implements OnInit {
       }
     },
     error => {
-      this.flashMessage.show('Invalid username or password', {
+      this.flashMessage.show(JSON.parse(error._body).error.message, {
         cssClass: 'alert-danger',
         timeout: 5000
       });
       this.spinnerService.hide();
-    });
+    }
+    );
+
+
   }
+
 }

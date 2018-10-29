@@ -1,0 +1,60 @@
+<div class="row">
+    <div class="auth-up container">
+      <h2>International Space Station<br>Location</h2>
+
+      <form (submit)="onSignupSubmit()">
+
+
+        <div class="row form-group">
+
+          <div class="col">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Email"
+              [(ngModel)]="email"
+              name="email">
+          </div>
+
+          <div class="col">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Username"
+              [(ngModel)]="username"
+              name="username">
+          </div>
+        </div>
+
+        <div class="row form-group">
+
+          <div class="col">
+            <input
+              type="password"
+              class="form-control"
+              placeholder="Password"
+              [(ngModel)]="password"
+              name="password">
+          </div>
+
+          <div class="col">
+            <input
+              type="password"
+              class="form-control"
+              placeholder="Confirm Password"
+              [(ngModel)]="confirmPassword"
+              name="confirmPassword">
+          </div>
+        </div>
+
+        <input type="submit" class="btn btn-primary input-sm" placeholder="Log in" style="width: 100%">
+        <small id="emailHelp" class="form-text text-muted">
+          Sign up to see fun facts about the International Space Station
+        </small>
+      </form>
+    </div>
+  
+    <div class="auth-down container">
+      Don't have an account? <span class="signup" (click)="updateLogin()">Log In</span>
+    </div>
+  </div>

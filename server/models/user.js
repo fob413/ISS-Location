@@ -53,5 +53,32 @@ UserSchema.statics.authenticate = function(email, password, callback) {
     });
 };
 
+// check for duplicates
+UserSchema.statics.duplicateCheck = function(email, username, callback) {
+  User.findOne({ email: email })
+    .exec(function(error, emailUser) {
+      if (error) return callback(error);
+
+      if (emailUser) {
+        var err = new Error('Email already exists, please choose another.');
+        err.status = 409;
+        return callback(err);
+      }
+
+      User.findOne({ username: username })
+        .exec(function(err, usernameUser) {
+          if (error) return callback(error);
+
+          if (usernameUser) {
+            var newErr = new Error('Username already exists, please choose another.');
+            newErr.status = 409;
+            return callback(newErr);
+          }
+
+          return callback();
+        });
+    });
+};
+
 const User = mongoose.model('User', UserSchema);
 module.exports = User;

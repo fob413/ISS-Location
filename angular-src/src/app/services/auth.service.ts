@@ -15,12 +15,24 @@ export class AuthService {
     private authenticationSource = new BehaviorSubject(false);
     authenticated = this.authenticationSource.asObservable();
 
+    private loginSource = new BehaviorSubject(true);
+    login = this.loginSource.asObservable();
+
   constructor(private http: Http) { }
 
   loginUser(user) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post('https://iss-location-app.herokuapp.com/api/v1/auth/signin',
+      user,
+      {headers: headers}
+    ).pipe(map(res => res.json()));
+  }
+
+  signupUser(user) {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post('https://iss-location-app.herokuapp.com/api/v1/auth/signup',
       user,
       {headers: headers}
     ).pipe(map(res => res.json()));
@@ -42,5 +54,9 @@ export class AuthService {
 
   updateAuthentication(isAuthenticated: boolean) {
     this.authenticationSource.next(isAuthenticated);
+  }
+
+  updateLogin(login: boolean) {
+    this.loginSource.next(login);
   }
 }

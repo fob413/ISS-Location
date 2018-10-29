@@ -1,0 +1,60 @@
+small {
+  text-align: center;
+}
+
+h2 {
+  font-family: 'Lora', serif;
+  font-weight: 900;
+  text-align: center;
+  font-size: 15px;
+}
+
+form {
+  width: 80%;
+  margin: auto;
+}
+
+.auth-up {
+  background-color: white;
+  width: 85%;
+  margin: auto;
+  padding: 0;
+  font-size: 10px;
+}
+
+.auth-down {
+  background-color: white;
+  width: 85%;
+  margin: auto;
+  padding: 2% 0;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.btn-primary {
+  background-color: #67ADFF !important;
+  border-color: #67ADFF !important;
+}
+
+.signup {
+  color: #67ADFF;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+@media screen and (min-width: 960px) {
+  h2 {
+    font-family: 'Lora', serif;
+    font-weight: bold;
+    text-align: center;
+    font-size: 28px;
+  }
+
+  .auth-up {
+    background-color: white;
+    width: 85%;
+    margin: 26vh auto 0 auto;
+    padding: 2% 0;
+    font-size: 20px;
+  }
+}

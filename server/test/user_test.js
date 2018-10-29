@@ -30,7 +30,7 @@ describe('User Signup', () => {
       });
   });
 
-  it('should throw an error on duplicate signup', (done) => {
+  it('should throw an error on duplicate email signup', (done) => {
     const user = {
       username: 'segun',
       email: 'segun@email.com',
@@ -42,7 +42,41 @@ describe('User Signup', () => {
       .post('/api/v1/auth/signup')
       .send(user)
       .end((err, res) => {
-        expect(res.status).to.deep.equal(500);
+        expect(res.status).to.deep.equal(409);
+        done();
+      });
+  });
+
+  it('should throw an error on duplicate username signup', (done) => {
+    const user = {
+      username: 'segun',
+      email: 'danny@email.com',
+      password: 'asdf;lkj',
+      confirmPassword: 'asdf;lkj'
+    };
+
+    request(server)
+      .post('/api/v1/auth/signup')
+      .send(user)
+      .end((err, res) => {
+        expect(res.status).to.deep.equal(409);
+        done();
+      });
+  });
+
+  it('should throw an error on mismatched passwords', (done) => {
+    const user = {
+      username: 'segun',
+      email: 'segun@email.com',
+      password: 'asdf;lkj',
+      confirmPassword: 'asdf;l'
+    };
+
+    request(server)
+      .post('/api/v1/auth/signup')
+      .send(user)
+      .end((err, res) => {
+        expect(res.status).to.deep.equal(400);
         done();
       });
   });
