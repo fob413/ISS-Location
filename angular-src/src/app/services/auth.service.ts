@@ -38,6 +38,11 @@ export class AuthService {
     ).pipe(map(res => res.json()));
   }
 
+  logoutUser() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('username')
+  }
+
   saveToken(token) {
     localStorage.setItem('token', token);
     localStorage.setItem('username', this.helper.decodeToken(token).data.username);

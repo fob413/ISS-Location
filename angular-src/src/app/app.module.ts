@@ -19,6 +19,7 @@ import { AuthService } from './services/auth.service';
 import { FlashMessagesModule } from 'angular2-flash-messages';
 import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 import { SignupComponent } from './components/app-page/authentication/signup/signup.component';
+import { FunFactsComponent } from './components/app-page/fun-facts/fun-facts.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { SignupComponent } from './components/app-page/authentication/signup/sig
     AppPageComponent,
     AuthenticationComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    FunFactsComponent
   ],
   imports: [
     BrowserModule,

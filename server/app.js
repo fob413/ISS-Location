@@ -3,6 +3,7 @@ import { json as jsonParser } from 'body-parser';
 import logger from 'morgan';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import cors from 'cors';
 import routes from './routes';
 import { notFound, handler } from './middleware/error';
 
@@ -23,6 +24,7 @@ db.once("open", () => {
 
 app.use(logger("dev"));
 app.use(jsonParser());
+app.use(cors());
 
 app.use((req, res, next) => {
 	res.header("Access-Control-Allow-Origin", "*");
