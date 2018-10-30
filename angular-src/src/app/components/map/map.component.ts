@@ -9,7 +9,7 @@ import { IssService } from '../../services/iss.service';
 export class MapComponent implements OnInit {
   latitude: number;
   longitude: number;
-  zoom: number = 2.53;
+  zoom: number = 1.5;
 
   recenterMap(lat,lng){
     this.latitude = lat;

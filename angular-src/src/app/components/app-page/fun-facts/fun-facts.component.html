@@ -1,0 +1,21 @@
+<div class="container">
+
+  <div class="row fun-fact-top">
+    <div class="col greet">Hi {{username}}</div>
+    <div class="col power-off">
+        <i class="fas fa-power-off off" (click)="onLogOut()"></i>
+    </div>
+  </div>
+
+  <div class="fun-fact-mid">
+      <h2>International Space Station<br>Location</h2>
+
+      <p *ngIf="fact">
+        {{fact}}
+      </p>
+
+      <button (click)="getFunFact()" class="btn btn-primary next-fact" style="width: 100%">Next Fun Fact</button>
+      
+  </div>
+
+</div>

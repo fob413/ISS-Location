@@ -61,16 +61,6 @@ describe('Funfacts', () => {
     });
   });
 
-  it('should get a fun fact', done => {
-    request(server)
-      .get('/api/v1/fun-fact/10')
-      .set('token', token)
-      .end((err, res) => {
-        expect(res.status).to.deep.equal(200);
-        done();
-      });
-  });
-
   it('should not get a fun fact that does not exist', done => {
     request(server)
       .get('/api/v1/fun-fact/100')
@@ -108,6 +98,16 @@ describe('Funfacts', () => {
       .set('seedadmin', 'invalid token')
       .end((err, res) => {
         expect(res.status).to.deep.equal(403);
+        done();
+      });
+  });
+
+  it('should get a fun fact', done => {
+    request(server)
+      .get('/api/v1/fun-fact/10')
+      .set('token', token)
+      .end((err, res) => {
+        expect(res.status).to.deep.equal(200);
         done();
       });
   });
