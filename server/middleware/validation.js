@@ -1,4 +1,8 @@
 import UserModel from '../models/user';
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 class Validation {
   static validateSignup (req, res, next) {
@@ -48,6 +52,50 @@ class Validation {
         next();
       }
     }); 
+  }
+
+  static validateToken (req, res, next) {
+    const { token } = req.headers;
+    if (token) {
+      // verifies secret and checks exp
+        jwt.verify(token, process.env.SECRET, (err, decoded) => {
+          if (err) { // failed verification.
+            return res.status(401).send({
+              success: false,
+              message: 'Failed to authenticate token'
+            });
+          }
+          req.decoded = decoded;
+          next(); // no error, proceed
+        });
+      } else {
+        // forbidden without token
+        return res.status(403).send({
+          success: false,
+          message: 'No token provided'
+        });
+      }
+  }
+
+  static validateSeed (req, res, next) {
+    const { seedadmin } = req.headers;
+    if (seedadmin) {
+      if (seedadmin === process.env.SEEDADMIN) {
+        next();
+      } else {
+        // forbidden
+        return res.status(403).send({
+          success: false,
+          message: 'You are not authorized for this action'
+        });
+      }
+    } else {
+      // forbidden
+      return res.status(403).send({
+        success: false,
+        message: 'You are not authorized for this action'
+      });
+    }
   }
 }
 
