@@ -22,7 +22,7 @@ export class FunFactService {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     headers.append('token', localStorage.getItem('token'));
-    return this.http.get(`http://localhost:3000/api/v1/fun-fact/${this.factId}`,
+    return this.http.get(`api/v1/fun-fact/${this.factId}`,
     { headers: headers })
       .pipe(map(res => res.json()));
   }

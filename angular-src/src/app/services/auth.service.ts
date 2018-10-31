@@ -23,7 +23,7 @@ export class AuthService {
   loginUser(user) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.post('https://iss-location-app.herokuapp.com/api/v1/auth/signin',
+    return this.http.post('api/v1/auth/signin',
       user,
       {headers: headers}
     ).pipe(map(res => res.json()));
@@ -32,7 +32,7 @@ export class AuthService {
   signupUser(user) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.post('https://iss-location-app.herokuapp.com/api/v1/auth/signup',
+    return this.http.post('api/v1/auth/signup',
       user,
       {headers: headers}
     ).pipe(map(res => res.json()));
