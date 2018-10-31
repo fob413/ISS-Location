@@ -6,6 +6,7 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import routes from './routes';
 import { notFound, handler } from './middleware/error';
+import path from 'path';
 
 dotenv.config();
 
@@ -13,6 +14,8 @@ const app = express();
 
 mongoose.connect(process.env.DATABASE);
 const db = mongoose.connection;
+
+app.use(express.static(path.join(__dirname, '../public')));
 
 db.on("error", err => {
   console.error("connection error:", err);
@@ -47,6 +50,11 @@ app.use(handler);
 
 
 const port = process.env.PORT || 3000;
+
+// serve the client
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/index.html'));
+});
 
 const server = app.listen(port, () => {
   console.log('Express server is listening on port:', port);
