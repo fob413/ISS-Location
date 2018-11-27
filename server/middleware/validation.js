@@ -1,8 +1,8 @@
 import UserModel from '../models/user';
 import jwt from 'jsonwebtoken';
-import dotenv from 'dotenv';
+import config from './config';
 
-dotenv.config();
+const { secret, seedAdmin } = config;
 
 class Validation {
   static validateSignup (req, res, next) {
@@ -44,7 +44,7 @@ class Validation {
     }
   }
 
-  static validateDuplicates (req, res, next) {
+  static validateUserDuplicates (req, res, next) {
     UserModel.duplicateCheck(req.body.email, req.body.username, function (error) {
       if (error) {
         return next(error);
@@ -58,7 +58,7 @@ class Validation {
     const { token } = req.headers;
     if (token) {
       // verifies secret and checks exp
-        jwt.verify(token, process.env.SECRET, (err, decoded) => {
+        jwt.verify(token, secret, (err, decoded) => {
           if (err) { // failed verification.
             return res.status(401).send({
               success: false,
@@ -80,7 +80,7 @@ class Validation {
   static validateSeed (req, res, next) {
     const { seedadmin } = req.headers;
     if (seedadmin) {
-      if (seedadmin === process.env.SEEDADMIN) {
+      if (seedadmin === seedAdmin) {
         next();
       } else {
         // forbidden

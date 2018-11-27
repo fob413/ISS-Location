@@ -1,8 +1,8 @@
 import UserModel from '../models/user';
 import jwt from 'jsonwebtoken';
-import dotenv from 'dotenv';
+import config from '../middleware/config';
 
-dotenv.config();
+const { secret } = config;
 
 class User {
   static signup (req, res, next) {
@@ -22,7 +22,7 @@ class User {
           id: user._id,
           username: user.username
         }
-        }, process.env.SECRET, { expiresIn: '12h' });
+        }, secret, { expiresIn: '12h' });
 
       return res.status(201).json({
         success: true,
@@ -43,7 +43,7 @@ class User {
             id: user._id,
             username: user.username
           }
-        }, process.env.SECRET, { expiresIn: '12h' });
+        }, secret, { expiresIn: '12h' });
 
         return res.json({
           success: true,
