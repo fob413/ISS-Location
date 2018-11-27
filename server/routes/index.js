@@ -5,7 +5,7 @@ import { getFact, seedFact } from '../controllers/funfact';
 import {
   validateSignup,
   validateSignin,
-  validateDuplicates,
+  validateUserDuplicates,
   validateToken,
   validateSeed
 } from '../middleware/validation';
@@ -13,7 +13,7 @@ import {
 const router = Router();
 
 // POST /signup
-router.post('/auth/signup', validateSignup, validateDuplicates, signup);
+router.post('/auth/signup', validateSignup, validateUserDuplicates, signup);
 
 // POST /signin
 router.post('/auth/signin', validateSignin, signin);
