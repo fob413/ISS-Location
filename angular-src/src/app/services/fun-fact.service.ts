@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers } from '@angular/http';
-import { map } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http'
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,22 +9,17 @@ export class FunFactService {
   factId: number = factArray[Math.floor(Math.random()* factArray.length)];
 
   constructor(
-    private http: Http
+    private http: HttpClient
   ) { }
 
-  getFact() {
+  getFact(): Observable<any> {
     const newFactArray = factArray.filter((item) => {
       return item !== this.factId
     });
     const newFactId = newFactArray[Math.floor(Math.random()* factArray.length)];
     this.factId = newFactId;
 
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    headers.append('token', localStorage.getItem('token'));
-    return this.http.get(`api/v1/fun-fact/${this.factId}`,
-    { headers: headers })
-      .pipe(map(res => res.json()));
+    return this.http.get<any>(`api/v1/fun-fact/${this.factId}`)
   }
 
 }

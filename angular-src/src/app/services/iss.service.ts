@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse, HttpHeaders } from '@angular/common/http';
-import { Http, Headers } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -11,8 +10,7 @@ export class IssService {
   private url: string = `api/v1/location`;
 
   getLocation(): Observable<Location> {
-    let headers = new HttpHeaders({'Content-Type': 'application/json'});
-    return this.http.get<Location>(this.url, { headers: headers });
+    return this.http.get<Location>(this.url);
   }
 
   constructor(private http: HttpClient) { }

@@ -11,11 +11,6 @@ export class MapComponent implements OnInit {
   longitude: number;
   zoom: number = 1.5;
 
-  recenterMap(lat,lng){
-    this.latitude = lat;
-    this.longitude = lng;
-    }
-
   getLocation(): void {
     this.issService.getLocation().subscribe(
       data => {

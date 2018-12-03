@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers } from '@angular/http';
+import { Http } from '@angular/http';
 import { map } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { BehaviorSubject } from 'rxjs';
@@ -21,20 +21,14 @@ export class AuthService {
   constructor(private http: Http) { }
 
   loginUser(user) {
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
     return this.http.post('api/v1/auth/signin',
-      user,
-      {headers: headers}
+      user
     ).pipe(map(res => res.json()));
   }
 
   signupUser(user) {
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
     return this.http.post('api/v1/auth/signup',
-      user,
-      {headers: headers}
+      user
     ).pipe(map(res => res.json()));
   }
 

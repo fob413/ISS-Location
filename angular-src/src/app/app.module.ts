@@ -1,11 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AgmCoreModule } from '@agm/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { MapComponent } from './components/map/map.component';
@@ -15,6 +14,7 @@ import { AuthenticationComponent } from './components/app-page/authentication/au
 import { LoginComponent } from './components/app-page/authentication/login/login.component';
 
 import { AuthService } from './services/auth.service';
+import { AuthInterceptor } from './services/auth.interceptor';
 
 import { FlashMessagesModule } from 'angular2-flash-messages';
 import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
@@ -34,7 +34,6 @@ import { FunFactsComponent } from './components/app-page/fun-facts/fun-facts.com
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     AgmCoreModule.forRoot({
       apiKey: environment.apiKey
     }),
@@ -44,7 +43,14 @@ import { FunFactsComponent } from './components/app-page/fun-facts/fun-facts.com
     Ng4LoadingSpinnerModule.forRoot(),
     HttpModule
   ],
-  providers: [ AuthService ],
+  providers: [ 
+    AuthService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+   ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
