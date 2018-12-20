@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ValidateService } from '../../../../services/validate.service';
-import { AuthService } from '../../../../services/auth.service';
+import { AuthService } from '../../../../services/auth/auth.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 

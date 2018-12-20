@@ -19,7 +19,7 @@ export class FunFactService {
     const newFactId = newFactArray[Math.floor(Math.random()* factArray.length)];
     this.factId = newFactId;
 
-    return this.http.get<any>(`api/v1/fun-fact/${this.factId}`)
+    return this.http.get<any>(`/api/v1/fun-fact/${this.factId}`)
   }
 
 }

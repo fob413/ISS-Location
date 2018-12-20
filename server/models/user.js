@@ -17,6 +17,10 @@ const UserSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true
+  },
+  isLoggedin: {
+    type: Boolean,
+    default: false
   }
 });
 

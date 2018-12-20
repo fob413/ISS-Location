@@ -9,7 +9,8 @@ class User {
     let userData = {
       username: req.body.username.trim(),
       email: req.body.email.trim(),
-      password: req.body.password
+      password: req.body.password,
+      isLoggedin: true
     };
 
     UserModel.create(userData, (err, user) => {
@@ -38,18 +39,47 @@ class User {
         err.status = 401;
         return next(err);
       } else {
-        const token = jwt.sign({
-          data: {
-            id: user._id,
-            username: user.username
-          }
-        }, secret, { expiresIn: '12h' });
+        user.isLoggedin = true;
+        user.password = req.body.password;
 
-        return res.json({
-          success: true,
-          token
+        user.save(err => {
+          if (err) {
+            let err = new Error("Something went wrong while logging you in. Please try again later");
+            err.status = 500;
+            return next(err);
+          }
+
+          const token = jwt.sign({
+            data: {
+              id: user._id,
+              username: user.username
+            }
+          }, secret, { expiresIn: '12h' });
+  
+          return res.json({
+            success: true,
+            token
+          });
+
         });
       }
+    });
+  }
+
+  static signout (req, res, next) {
+    const { data } = req.decoded;
+
+    UserModel.findByIdAndUpdate(data.id, { $set: { isLoggedin: false }}, (err, user) => {
+      if (err) {
+        let err = new Error("Something went wrong while logging you out. Please try again later");
+        err.status = 500;
+        return next(err);
+      }
+
+      return res.json({
+        success: true,
+        message: 'Successfully logged out'
+      });
     });
   }
 }

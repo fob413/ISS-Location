@@ -48,7 +48,7 @@ ISSL is a simple application that displays the current location of the Internati
 Tests were run with Mocha and Chai on all functions and API routes. To run the tests after the installation of the application:
 * Run ```npm test```
 
-# Template Imgaes
+# Template Images
 <p align="center">
   <img src="https://github.com/fob413/ISS-Location/blob/develop/angular-src/src/assets/images/template1.png?raw=true">
 
