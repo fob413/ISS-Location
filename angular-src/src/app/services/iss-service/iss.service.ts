@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class IssService {
 
-  private url: string = `api/v1/location`;
+  private url: string = `/api/v1/location`;
 
   getLocation(): Observable<Location> {
     return this.http.get<Location>(this.url);

@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { signup, signin } from '../controllers/user';
+import { signup, signin, signout } from '../controllers/user';
 import { location } from '../controllers/location';
 import { getFact, seedFact } from '../controllers/funfact';
 import {
@@ -17,6 +17,9 @@ router.post('/auth/signup', validateSignup, validateUserDuplicates, signup);
 
 // POST /signin
 router.post('/auth/signin', validateSignin, signin);
+
+// PUT /signout
+router.put('/auth/signout', validateToken, signout);
 
 // GET /location
 router.get('/location', location);

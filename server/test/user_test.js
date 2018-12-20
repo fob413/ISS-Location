@@ -179,3 +179,37 @@ describe('User signin', () => {
       });
   });
 });
+
+describe('User signout', () => {
+  before(done => {
+    User.remove({}, (err) => {
+      // clear user database
+      done();
+    });
+  });
+
+  it('should successfully sign out a user', done => {
+    const user = {
+      username: 'mercy',
+      email: 'mercy@email.com',
+      password: 'asdf;lkj',
+      confirmPassword: 'asdf;lkj'
+    };
+
+    request(server)
+      .post('/api/v1/auth/signup')
+      .send(user)
+      .end((err, res) => {
+        expect(res.status).to.deep.equal(201);
+
+        request(server)
+          .put('/api/v1/auth/signout')
+          .set('token', res.body.token)
+          .end((error, response) => {
+            expect(response.status).to.deep.equal(200);
+            expect(response.body.message).to.equal('Successfully logged out');
+            done();
+          });
+      });
+  });
+});

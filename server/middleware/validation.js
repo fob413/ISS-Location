@@ -20,11 +20,11 @@ class Validation {
           return next();
         }
         
-        let error = new Error("Passwords don't match");
+        let error = new Error("passwords don't match");
         error.status = 400;
         return next(error);
     } else {
-      let error = new Error('Username, email, password and confirmPasswrod are required');
+      let error = new Error('username, email, password and confirmPasswrod are required');
       error.status = 400;
       return next(error);
     }
@@ -38,7 +38,7 @@ class Validation {
     ) {
       next();
     } else {
-      let error = new Error("Username and password are required");
+      let error = new Error("username and password are required");
       error.status = 400;
       next(error);
     }
@@ -65,8 +65,19 @@ class Validation {
               message: 'Failed to authenticate token'
             });
           }
-          req.decoded = decoded;
-          next(); // no error, proceed
+          
+          // verify user is still logged in
+          UserModel.findOne({ _id: decoded.data.id, isLoggedin: true }, (err, user) => {
+            if (err || !user) {
+              return res.status(401).send({
+                success: false,
+                message: 'Failed to authenticate token'
+              });
+            }
+            
+            req.decoded = decoded;
+            next(); // no error, proceed
+          });
         });
       } else {
         // forbidden without token
