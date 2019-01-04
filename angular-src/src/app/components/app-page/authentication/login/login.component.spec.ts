@@ -6,9 +6,8 @@ import { HttpModule} from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 
 import { LoginComponent } from './login.component';
-import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 
-fdescribe('LoginComponent', () => {
+describe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
 

@@ -28,7 +28,7 @@ describe('FunFactService', () => {
         success: true,
         data: {
           _id: "5bd88f0b7e4ff200209fe368",
-          fact:"The space station completes 15.5 orbits a day, which means the crew members on board the station experience a sunrise or sunset every 92 minutes.","id":19,"__v":0
+          fact: `The space station completes 15.5 orbits a day, which means the crew members on board the station experience a sunrise or sunset every 92 minutes.`
         }
       }
 
