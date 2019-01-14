@@ -1,10 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 import { AppPageComponent } from './app-page.component';
-import { FunFactsComponent } from './fun-facts/fun-facts.component';
-import { AuthenticationComponent } from './authentication/authentication.component';
-import { LoginComponent } from './authentication/login/login.component';
-import { SignupComponent } from './authentication/signup/signup.component';
 
 import { AuthService } from '../../services/auth/auth.service';
 
@@ -28,11 +25,10 @@ describe('AppPageComponent', () => {
         Ng4LoadingSpinnerModule.forRoot()
       ],
       declarations: [ 
-        AppPageComponent,
-        FunFactsComponent,
-        AuthenticationComponent,
-        LoginComponent,
-        SignupComponent
+        AppPageComponent
+      ],
+      schemas: [
+        NO_ERRORS_SCHEMA
       ],
       providers:[
         AuthService

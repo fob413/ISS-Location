@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 import { FormsModule } from '@angular/forms';
 import { HttpModule} from '@angular/http';
@@ -7,8 +8,6 @@ import { FlashMessagesModule } from 'angular2-flash-messages';
 import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 
 import { AuthenticationComponent } from './authentication.component';
-import { LoginComponent } from './login/login.component';
-import { SignupComponent } from './signup/signup.component';
 
 describe('AuthenticationComponent', () => {
   let component: AuthenticationComponent;
@@ -25,8 +24,9 @@ describe('AuthenticationComponent', () => {
       ],
       declarations: [
         AuthenticationComponent,
-        LoginComponent,
-        SignupComponent
+      ],
+      schemas: [
+        NO_ERRORS_SCHEMA
       ]
     })
     .compileComponents();

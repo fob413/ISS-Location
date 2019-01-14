@@ -7,22 +7,16 @@ import { AgmCoreModule } from '@agm/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 import { IssServiceModule } from './services/iss-service/iss-service.module';
 import { FunFactModule } from './services/fun-fact/fun-fact.module';
 import { AuthModule } from './services/auth/auth.module';
 
-import { SidebarComponent } from './components/sidebar/sidebar.component';
-import { MapComponent } from './components/map/map.component';
-import { AppPageComponent } from './components/app-page/app-page.component';
 import { environment } from '../environments/environment.dev';
-import { AuthenticationComponent } from './components/app-page/authentication/authentication.component';
-import { LoginComponent } from './components/app-page/authentication/login/login.component';
 
 import { FlashMessagesModule } from 'angular2-flash-messages';
 import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
-import { SignupComponent } from './components/app-page/authentication/signup/signup.component';
-import { FunFactsComponent } from './components/app-page/fun-facts/fun-facts.component';
 
 
 
@@ -45,15 +39,11 @@ describe('AppComponent', () => {
         FunFactModule
       ],
       declarations: [
-        AppComponent,
-        SidebarComponent,
-        MapComponent,
-        AppPageComponent,
-        AuthenticationComponent,
-        LoginComponent,
-        SignupComponent,
-        FunFactsComponent
+        AppComponent
       ],
+      schemas: [
+        NO_ERRORS_SCHEMA
+      ]
     }).compileComponents();
   }));
 
